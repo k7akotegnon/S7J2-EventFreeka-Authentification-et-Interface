@@ -1,0 +1,51 @@
+<% content_for :title, "Evenements - Event Freeka" %>
+
+<!-- Section Hero / Jumbotron pour l'accueil -->
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+  <div class="container-fluid py-5 text-center">
+    <h1 class="display-5 fw-bold">Bienvenue sur EventFreeka !</h1>
+    <p class="col-md-8 mx-auto fs-4 text-muted">
+      Découvrez les événements les plus branchés de votre ville ou créez le vôtre dès maintenant.
+    </p>
+    <% if user_signed_in? %>
+      <%= link_to "Proposer un événement", new_event_path, class: "btn btn-primary btn-lg shadow" %>
+    <% else %>
+      <%= link_to "Rejoignez l'aventure", new_user_registration_path, class: "btn btn-primary btn-lg shadow" %>
+    <% end %>
+  </div>
+</div>
+
+<!-- Grille des événements -->
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @events.each do |event| %>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+          <!-- Image par défaut (en attendant Active Storage) -->
+          <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Event Image" style="height: 200px; object-fit: cover;">
+          
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-info text-dark"><%= event.price %> €</span>
+              <small class="text-muted"><%= event.attendances.count %> participant(s)</small>
+            </div>
+            
+            <h5 class="card-title fw-bold"><%= event.title %></h5>
+            <p class="card-text text-muted small">
+              <i class="bi bi-calendar-event"></i> <%= event.start_date.strftime("%d/%m/%Y à %H:%M") %>
+            </p>
+            <p class="card-text text-secondary">
+              <%= truncate(event.description, length: 100) %>
+            </p>
+          </div>
+          
+          <div class="card-footer bg-white border-top-0 pb-3">
+            <div class="d-grid gap-2">
+              <%= link_to "Voir l'événement", event_path(event.id), class: "btn btn-outline-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

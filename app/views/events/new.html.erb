@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card shadow-sm p-4">
+        <h1 class="h3 mb-3 text-center">Proposer un événement</h1>
+
+        <%= form_for(@event) do |f| %>
+          <% if @event.errors.any? %>
+            <div class="alert alert-danger">
+              <p>L'événement n'a pas pu être créé :</p>
+              <ul>
+                <% @event.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :title, "Titre de l'événement" %>
+            <%= f.text_field :title, class: "form-control", placeholder: "Min 5 caractères" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :description, "Description" %>
+            <%= f.text_area :description, class: "form-control", rows: 5, placeholder: "Min 20 caractères" %>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <%= f.label :start_date, "Date de début" %>
+              <%= f.datetime_local_field :start_date, class: "form-control" %>
+            </div>
+            <div class="col-md-6 mb-3">
+              <%= f.label :duration, "Durée (minutes)" %>
+              <%= f.number_field :duration, class: "form-control", step: 5 %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <%= f.label :price, "Prix (€)" %>
+              <%= f.number_field :price, class: "form-control" %>
+            </div>
+            <div class="col-md-6 mb-3">
+              <%= f.label :location, "Lieu" %>
+              <%= f.text_field :location, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <%= f.submit "Créer l'événement", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

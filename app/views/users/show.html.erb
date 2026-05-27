@@ -1,0 +1,17 @@
+<h1>Mon Profil</h1>
+<div class="card mb-4">
+  <div class="card-body">
+    <p><strong>Prénom :</strong> <%= @user.first_name %></p>
+    <p><strong>Nom :</strong> <%= @user.last_name %></p>
+    <p><strong>Email :</strong> <%= @user.email %></p>
+    <p><strong>Description :</strong> <%= @user.description %></p>
+    <%= link_to "Modifier mes identifiants", edit_user_registration_path, class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+</div>
+
+<h3>Mes événements organisés</h3>
+<ul>
+  <% @events.each do |event| %>
+    <li><%= link_to event.title, event_path(event.id) %></li>
+  <% end %>
+</ul>

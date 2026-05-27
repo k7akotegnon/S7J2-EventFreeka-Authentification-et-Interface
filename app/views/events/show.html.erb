@@ -1,0 +1,73 @@
+<% content_for :title, "#{@event.title} - Event Freeka" %>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Colonne de Gauche : Détails de l'événement -->
+    <div class="col-md-8">
+      <div class="mb-4">
+        <%= link_to "← Retour aux événements", events_path, class: "btn btn-link text-decoration-none ps-0" %>
+      </div>
+      
+      <h1 class="display-4 fw-bold mb-3"><%= @event.title %></h1>
+      <p class="text-muted">
+        <i class="bi bi-calendar-event"></i> 
+        <%= @event.start_date.strftime("%d %B %Y à %Hh%M") %>
+      </p>
+      
+      <div class="my-5">
+        <h3 class="h4 border-bottom pb-2">Description</h3>
+        <p class="lead text-secondary"><%= @event.description %></p>
+      </div>
+    </div>
+
+    <!-- Colonne de Droite : Boîte d'informations et Action -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+        <div class="card-body">
+          <h2 class="h5 card-title fw-bold mb-4 text-uppercase small text-muted">Informations</h2>
+          
+          <ul class="list-unstyled mb-4">
+            <li class="mb-3">
+              <strong class="d-block text-dark">Lieu</strong>
+              <span class="text-muted"><%= @event.location %></span>
+            </li>
+            <li class="mb-3">
+              <strong class="d-block text-dark">Durée</strong>
+              <span class="text-muted"><%= @event.duration %> minutes</span>
+            </li>
+            <li class="mb-3">
+              <strong class="d-block text-dark">Prix</strong>
+              <span class="badge bg-success fs-6"><%= @event.price %> €</span>
+            </li>
+            <li class="mb-3">
+              <strong class="d-block text-dark">Organisateur</strong>
+              <span class="text-muted">
+                <%= @event.administrator.first_name %> <%= @event.administrator.last_name %>
+              </span>
+            </li>
+          </ul>
+
+          <div class="bg-light p-3 rounded mb-4 text-center">
+            <h3 class="h6 mb-1">Participants</h3>
+            <div class="display-6 fw-bold text-primary"><%= @event.attendances.count %></div>
+            <small class="text-muted text-uppercase small">personne(s) inscrite(s)</small>
+          </div>
+
+          <hr>
+
+          <div class="d-grid gap-2 mt-4">
+            <% if user_signed_in? %>
+              <%# On prépare le bouton qui servira demain pour Stripe (S7J3) %>
+              <%= link_to "Rejoindre l'événement", "#", class: "btn btn-primary btn-lg" %>
+            <% else %>
+              <div class="text-center">
+                <p class="small text-muted mb-2">Connectez-vous pour participer</p>
+                <%= link_to "Se connecter", new_user_session_path, class: "btn btn-outline-secondary w-100" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
