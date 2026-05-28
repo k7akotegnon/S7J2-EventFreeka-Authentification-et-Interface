@@ -55,10 +55,16 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
+  
+  # Remplace 'ton-app-eventfreeka.onrender.com' par ton URL réelle sur Render
+  config.action_mailer.default_url_options = { host: 'https://s7j2-eventfreeka-authentification-et.onrender.com', protocol: 'https' }
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  # Indique à Rails d'utiliser le protocole SMTP pour l'envoi
+  config.action_mailer.delivery_method = :smtp
+  
+  # Active l'envoi effectif des emails
+  config.action_mailer.perform_deliveries = true
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
   # config.action_mailer.smtp_settings = {

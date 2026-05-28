@@ -61,6 +61,7 @@ group :development do
   gem "better_errors"       # Pour une meilleure interface de debug en cas d'erreur
   gem "binding_of_caller"   # Nécessaire pour que better_errors puisse afficher le contexte des erreurs
   gem "faker"                # Pour générer de fausses données (noms, adresses, etc.) lors du développement
+  gem 'dotenv-rails'         # Pour charger les variables d'environnement depuis un fichier .env (utile pour les clés API en développement)
 end
 
 group :test do
