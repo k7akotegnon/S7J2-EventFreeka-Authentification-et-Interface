@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'no-reply@event-freeka.fr'
+  default from: 'fungeronimo123@gmail.com' # Adresse e-mail d'expédition
 
   def welcome_email(user)
     # On récupère l'instance user pour la passer à la view
