@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "fungeronimo123@gmail.com"
+  default from: "onboarding@resend.dev" # Adresse e-mail d'expédition par défaut
   layout "mailer"
 end
